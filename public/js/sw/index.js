@@ -11,6 +11,15 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     // TODO: open a cache named 'wittr-static-v1'
     // Add cache the urls from urlsToCache
+
+    /* if the caches with that name on parameter 
+    is not found when open function invoked
+    , it will create the new one and caches.open return a Promise */
+    caches.open('wittr-static-v1').then((cache) =>{
+      return cache.addAll(urlsToCache)
+    }).catch((e) => {
+      console.log(e)
+    })
   );
 });
 
